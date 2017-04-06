@@ -42,7 +42,7 @@ salaryBeforeLoan = salaryGpBefore['transAmount'].agg({'salaryCountBeforeLoan':'c
 # the features BeforeLoan
 featureBeforeLoan = pd.merge(incomeBeforeLoan,spendBeforeLoan,how = 'outer', on = 'userId')
 featureBeforeLoan = pd.merge(featureBeforeLoan,salaryBeforeLoan,how = 'outer', on = 'userId')
-featureBeforeLoan = featureBeforeLoan.fillna(0) # if there is NaN, meanig the amount is 0
+featureBeforeLoan = featureBeforeLoan
 
 
 
@@ -72,7 +72,7 @@ featureBeforeLoan['avgSalaryIncomeBeforeLoan'] = featureBeforeLoan['totalSalaryB
 # plt.show()
 
 # salaryIncome percentile in income
-featureBeforeLoan['salaryIncomePercentileBeforeLoan'] = featureBeforeLoan['totalSalaryBeforeLoan'] / featureBeforeLoan['totalIncomeBeforeLoan'].fillna(0)
+featureBeforeLoan['salaryIncomePercentileBeforeLoan'] = featureBeforeLoan['totalSalaryBeforeLoan'] / featureBeforeLoan['totalIncomeBeforeLoan']
 
 
 # ==========================================================================================================================#
@@ -98,8 +98,7 @@ salaryAfterLoan = salaryGpAfter['transAmount'].agg({'salaryCountAfterLoan':'coun
 # the features AfterLoan
 featureAfterLoan = pd.merge(incomeAfterLoan,spendAfterLoan,how = 'outer', on = 'userId')
 featureAfterLoan = pd.merge(featureAfterLoan,salaryAfterLoan,how = 'outer', on = 'userId')
-featureAfterLoan = featureAfterLoan.fillna(0) # if there is NaN, meanig the amount is 0
-
+featureAfterLoan = featureAfterLoan
 # plt.plot(featureAfterLoan['userId'] ,featureAfterLoan['totalIncomeAfterLoan'] )
 # plt.plot(featureAfterLoan['userId'] ,featureAfterLoan['totalSalaryAfterLoan'] )
 # plt.plot(featureAfterLoan['userId'] ,featureAfterLoan['salaryIncomePercentileAfterLoan'] )
@@ -131,7 +130,7 @@ featureAfterLoan['avgSalaryIncomeAfterLoan'] = featureAfterLoan['totalSalaryAfte
 # plt.show()
 
 # salaryIncome percentile in income
-featureAfterLoan['salaryIncomePercentileAfterLoan'] = featureAfterLoan['totalSalaryAfterLoan'] / featureAfterLoan['totalIncomeAfterLoan'].fillna(0)
+featureAfterLoan['salaryIncomePercentileAfterLoan'] = featureAfterLoan['totalSalaryAfterLoan'] / featureAfterLoan['totalIncomeAfterLoan']
 # plt.plot(featureAfterLoan['userId'] ,featureAfterLoan['salaryIncomePercentileAfterLoan'] )
 # plt.show()
 
