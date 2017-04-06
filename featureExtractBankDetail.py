@@ -30,7 +30,7 @@ bankBeforeLoan = bankDetail2[bankDetail2['timeStamp']<=bankDetail2['loanTime']] 
 # count of incomes, amout of income, before loan
 incomeGpBefore = bankBeforeLoan[bankBeforeLoan['transType'] == 0].groupby('userId',as_index = False)
 incomeBeforeLoan = incomeGpBefore['transAmount'].agg({'incomeCountBeforeLoan':'count','totalIncomeBeforeLoan':'sum'})
-incomeBeforeLoan = pd.merge(incomeBeforeLoan, incomeGpBefore['timeStamp'].agg({'firstIncomeDayBeforeLoan':'min','lastIncomeDay':'max'}), how='left', on = 'userId')
+incomeBeforeLoan = pd.merge(incomeBeforeLoan, incomeGpBefore['timeStamp'].agg({'firstIncomeDayBeforeLoan':'min','lastIncomeDayBeforeLoan':'max'}), how='left', on = 'userId')
 # count of spend, amount of spend, before loan
 spendGpBefore = bankBeforeLoan[bankBeforeLoan['transType'] == 1].groupby('userId',as_index = False)
 spendBeforeLoan = spendGpBefore['transAmount'].agg({'spendCountBeforeLoan':'count','totalSpendBeforeLoan':'sum'})
@@ -59,13 +59,13 @@ featureBeforeLoan['overSpendBeforeLoan'] = featureBeforeLoan['totalSpendBeforeLo
 
 # average Income per month
 featureBeforeLoan['avgIncomeBeforeLoan'] = featureBeforeLoan['totalIncomeBeforeLoan']\
-    /((featureBeforeLoan['lastIncomeDay'] - featureBeforeLoan['firstIncomeDayBeforeLoan'])/365 * 12)
+    /((featureBeforeLoan['lastIncomeDayBeforeLoan'] - featureBeforeLoan['firstIncomeDayBeforeLoan'])/365 * 12)
 # plt.plot(featureBeforeLoan['userId'] ,featureBeforeLoan['avgIncomeBeforeLoan'] )
 # plt.show()
 
 # average salary per month
 featureBeforeLoan['avgSalaryIncomeBeforeLoan'] = featureBeforeLoan['totalSalaryBeforeLoan']\
-    /((featureBeforeLoan['lastIncomeDay'] - featureBeforeLoan['firstIncomeDayBeforeLoan'])/365 * 12)
+    /((featureBeforeLoan['lastIncomeDayBeforeLoan'] - featureBeforeLoan['firstIncomeDayBeforeLoan'])/365 * 12)
 # plt.plot(featureBeforeLoan['userId'] ,featureBeforeLoan['avgIncomeBeforeLoan'] )
 # plt.plot(featureBeforeLoan['userId'] ,featureBeforeLoan['avgSalaryIncomeBeforeLoan'] )
 # plt.legend(loc='upper left')
@@ -86,7 +86,7 @@ bankAfterLoan = bankDetail2[bankDetail2['timeStamp']>bankDetail2['loanTime']] # 
 # count of incomes, amout of income, After loan
 incomeGpAfter = bankAfterLoan[bankAfterLoan['transType'] == 0].groupby('userId',as_index = False)
 incomeAfterLoan = incomeGpAfter['transAmount'].agg({'incomeCountAfterLoan':'count','totalIncomeAfterLoan':'sum'})
-incomeAfterLoan = pd.merge(incomeAfterLoan, incomeGpAfter['timeStamp'].agg({'firstIncomeDayAfterLoan':'min','lastIncomeDay':'max'}), how='left', on = 'userId')
+incomeAfterLoan = pd.merge(incomeAfterLoan, incomeGpAfter['timeStamp'].agg({'firstIncomeDayAfterLoan':'min','lastIncomeDayAfterLoan':'max'}), how='left', on = 'userId')
 # count of spend, amount of spend, After loan
 spendGpAfter = bankAfterLoan[bankAfterLoan['transType'] == 1].groupby('userId',as_index = False)
 spendAfterLoan = spendGpAfter['transAmount'].agg({'spendCountAfterLoan':'count','totalSpendAfterLoan':'sum'})
@@ -118,13 +118,13 @@ featureAfterLoan['overSpendAfterLoan'] = featureAfterLoan['totalSpendAfterLoan']
 
 # average Income per month
 featureAfterLoan['avgIncomeAfterLoan'] = featureAfterLoan['totalIncomeAfterLoan']\
-    /((featureAfterLoan['lastIncomeDay'] - featureAfterLoan['firstIncomeDayAfterLoan'])/365 * 12)
+    /((featureAfterLoan['lastIncomeDayAfterLoan'] - featureAfterLoan['firstIncomeDayAfterLoan'])/365 * 12)
 # plt.plot(featureAfterLoan['userId'] ,featureAfterLoan['avgIncomeAfterLoan'] )
 # plt.show()
 
 # average Income per month
 featureAfterLoan['avgSalaryIncomeAfterLoan'] = featureAfterLoan['totalSalaryAfterLoan']\
-    /((featureAfterLoan['lastIncomeDay'] - featureAfterLoan['firstIncomeDayAfterLoan'])/365 * 12)
+    /((featureAfterLoan['lastIncomeDayAfterLoan'] - featureAfterLoan['firstIncomeDayAfterLoan'])/365 * 12)
 # plt.plot(featureAfterLoan['userId'] ,featureAfterLoan['avgIncomeAfterLoan'] )
 # plt.plot(featureAfterLoan['userId'] ,featureAfterLoan['avgSalaryIncomeAfterLoan'] )
 # plt.legend(loc='upper left')

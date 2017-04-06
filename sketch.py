@@ -47,3 +47,4 @@ featureAfterLoan['avgSalaryIncomeAfterLoan'] = featureAfterLoan['totalSalaryAfte
 
 # salaryIncome percentile in income
 featureAfterLoan['salaryIncomePercentileAfterLoan'] = featureAfterLoan['totalSalaryAfterLoan'] / featureAfterLoan['totalIncomeAfterLoan'].fillna(0)
+# what ever
