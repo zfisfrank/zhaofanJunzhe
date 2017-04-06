@@ -37,4 +37,4 @@ salaryBeforeLoan = salaryGpBefore['transAmount'].agg({'salaryCountBeforeLoan':'c
 # the features BeforeLoan
 featureBeforeLoan = pd.merge(incomeBeforeLoan,spendBeforeLoan,how = 'outer', on = 'userId')
 featureBeforeLoan = pd.merge(featureBeforeLoan,salaryBeforeLoan,how = 'outer', on = 'userId')
-featureBeforeLoan = featureBeforeLoan.fillna(0) #
+featureBeforeLoan = featureBeforeLoan.fillna(0) # if there is NaN, meanig the amount is 0
