@@ -135,3 +135,6 @@ featureAfterLoan['salaryIncomePercentileAfterLoan'] = featureAfterLoan['totalSal
 # plt.show()
 
 features = pd.merge(featureBeforeLoan,featureAfterLoan,how = 'outer', on ='userId')
+features = pd.merge(features,userInfo,how = 'outer',on = 'userId')
+features = features[['overDueLabel'] + list(features.columns.drop('overDueLabel'))]
+features.to_csv('bankDetailsFeatures.csv')
