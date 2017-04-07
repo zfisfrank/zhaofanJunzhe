@@ -5,11 +5,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 # loan information load
 # userInfo.columns : 'userId', 'gender', 'job', 'education', 'marriage', 'residentialType','loanTime', 'overDueLabel'
-userInfo = pd.read_csv('userInfoTrain.csv')
+userInfo = pd.read_csv('../dataSets/userInfoTrain.csv').sort_values('userId')
 
-# 银行流水记录：用户id,时间戳,交易类型,交易金额,工资收入标记
-bankDetailCol = ['userId','timeStamp','transType','transAmount','salaryIncome']
-bankDetail = pd.read_csv('bank_detail_train.csv',index_col = False, header  = None, names = bankDetailCol)
+# # 银行流水记录：用户id,时间戳,交易类型,交易金额,工资收入标记
+# bankDetailCol = ['userId','timeStamp','transType','transAmount','salaryIncome']
+# bankDetail = pd.read_csv('../dataSets/bankDetailTrain.csv',index_col = False, header  = None, names = bankDetailCol)
+
+# bankDetailCol = ['userId','timeStamp','transType','transAmount','salaryIncome']
+bankDetail = pd.read_csv('../dataSets/bankDetailTrain.csv').dropna().sort_values('userId')
 bankDetail['timeStamp'] = bankDetail['timeStamp'] // 86400 # sec convert to day
 
 ''' convert all rows belong to one userId into one row'''
@@ -17,8 +20,15 @@ bankDetail['timeStamp'] = bankDetail['timeStamp'] // 86400 # sec convert to day
 print(sum(bankDetail['timeStamp'] == 0)/len(bankDetail))
 
 # add loan time into the bankDetail
-bankDetail2 = pd.merge(bankDetail,userInfo[['userId','loanTime']],how = 'left',on = 'userId')
+bankDetail2 = pd.merge(bankDetail,userInfo[['userId','loanTime']],how = 'right',on = 'userId') # only bankDetail have same userId at right make sense
+# nonSalaryIncome = bankDetail2.loc[bankDetail2['transType'] == 0,['userId','transAmount']].set_index('userId') - \
+#     bankDetail2.loc[bankDetail2['salaryIncome'] == 1,['userId','transAmount']].set_index('userId')
 
+# greater = bankDetail2.loc[bankDetail2['transType'] == 0,['userId','transAmount']].set_index('userId') > \
+#     bankDetail2.loc[bankDetail2['salaryIncome'] == 1,['userId','transAmount']].set_index('userId')
+# bankDetail2 = bankDetail2.set_index('userId')
+# bankDetail2['nonSalaryIncome'] = nonSalaryIncome
+# bankDetail2 = bankDetail2.reset_index()
 # ==========================================================================================================================#
 # ==========================================================================================================================#
 # ============================================features before the loan time=================================================#
@@ -30,7 +40,7 @@ bankBeforeLoan = bankDetail2[bankDetail2['timeStamp']<=bankDetail2['loanTime']] 
 # count of incomes, amout of income, before loan
 incomeGpBefore = bankBeforeLoan[bankBeforeLoan['transType'] == 0].groupby('userId',as_index = False)
 incomeBeforeLoan = incomeGpBefore['transAmount'].agg({'incomeCountBeforeLoan':'count','totalIncomeBeforeLoan':'sum'})
-incomeBeforeLoan = pd.merge(incomeBeforeLoan, incomeGpBefore['timeStamp'].agg({'firstIncomeDayBeforeLoan':'min','lastIncomeDayBeforeLoan':'max'}), how='left', on = 'userId')
+incomeBeforeLoan = pd.merge(incomeBeforeLoan, incomeGpBefore['timeStamp'].agg({'firstIncomeDayBeforeLoan':'min','lastIncomeDayBeforeLoan':'max'}), how='outer', on = 'userId')
 # count of spend, amount of spend, before loan
 spendGpBefore = bankBeforeLoan[bankBeforeLoan['transType'] == 1].groupby('userId',as_index = False)
 spendBeforeLoan = spendGpBefore['transAmount'].agg({'spendCountBeforeLoan':'count','totalSpendBeforeLoan':'sum'})
@@ -42,7 +52,7 @@ salaryBeforeLoan = salaryGpBefore['transAmount'].agg({'salaryCountBeforeLoan':'c
 # the features BeforeLoan
 featureBeforeLoan = pd.merge(incomeBeforeLoan,spendBeforeLoan,how = 'outer', on = 'userId')
 featureBeforeLoan = pd.merge(featureBeforeLoan,salaryBeforeLoan,how = 'outer', on = 'userId')
-featureBeforeLoan = featureBeforeLoan
+# featureBeforeLoan = featureBeforeLoan
 
 
 
@@ -74,6 +84,15 @@ featureBeforeLoan['avgSalaryIncomeBeforeLoan'] = featureBeforeLoan['totalSalaryB
 # salaryIncome percentile in income
 featureBeforeLoan['salaryIncomePercentileBeforeLoan'] = featureBeforeLoan['totalSalaryBeforeLoan'] / featureBeforeLoan['totalIncomeBeforeLoan']
 
+# ============new features added
+# salary mean, median of all salary datas
+featureBeforeLoan = pd.merge(featureBeforeLoan, salaryGpBefore['transAmount'].agg({'salaryMeanBeforeLoan':'mean',\
+    'salaryMedianBeforeLoan':'median','salaryStdBeforeLoan':'std'}),\
+    how = 'outer', on = 'userId')
+# expense mean, median, std
+featureBeforeLoan = pd.merge(featureBeforeLoan, spendGpBefore['transAmount'].agg({'spendMeanBeforeLoan':'mean',\
+    'spendMedianBeforeLoan':'median','spendStdBeforeLoan':'std'}),\
+    how = 'outer', on = 'userId')
 
 # ==========================================================================================================================#
 # ==========================================================================================================================#
@@ -86,7 +105,7 @@ bankAfterLoan = bankDetail2[bankDetail2['timeStamp']>bankDetail2['loanTime']] # 
 # count of incomes, amout of income, After loan
 incomeGpAfter = bankAfterLoan[bankAfterLoan['transType'] == 0].groupby('userId',as_index = False)
 incomeAfterLoan = incomeGpAfter['transAmount'].agg({'incomeCountAfterLoan':'count','totalIncomeAfterLoan':'sum'})
-incomeAfterLoan = pd.merge(incomeAfterLoan, incomeGpAfter['timeStamp'].agg({'firstIncomeDayAfterLoan':'min','lastIncomeDayAfterLoan':'max'}), how='left', on = 'userId')
+incomeAfterLoan = pd.merge(incomeAfterLoan, incomeGpAfter['timeStamp'].agg({'firstIncomeDayAfterLoan':'min','lastIncomeDayAfterLoan':'max'}), how='outer', on = 'userId')
 # count of spend, amount of spend, After loan
 spendGpAfter = bankAfterLoan[bankAfterLoan['transType'] == 1].groupby('userId',as_index = False)
 spendAfterLoan = spendGpAfter['transAmount'].agg({'spendCountAfterLoan':'count','totalSpendAfterLoan':'sum'})
@@ -134,7 +153,17 @@ featureAfterLoan['salaryIncomePercentileAfterLoan'] = featureAfterLoan['totalSal
 # plt.plot(featureAfterLoan['userId'] ,featureAfterLoan['salaryIncomePercentileAfterLoan'] )
 # plt.show()
 
+# salary mean, median of all salary datas
+featureAfterLoan = pd.merge(featureAfterLoan, salaryGpBefore['transAmount'].agg({'salaryMeanAfterLoan':'mean',\
+    'salaryMedianAfterLoan':'median','salaryStdAfterLoan':'std'}),\
+    how = 'outer', on = 'userId')
+# expense mean, median, std
+featureAfterLoan = pd.merge(featureAfterLoan, spendGpBefore['transAmount'].agg({'spendMeanAfterLoan':'mean',\
+    'spendMedianAfterLoan':'median','spendStdAfterLoan':'std'}),\
+    how = 'outer', on = 'userId')
+
+
 features = pd.merge(featureBeforeLoan,featureAfterLoan,how = 'outer', on ='userId')
-features = pd.merge(features,userInfo,how = 'outer',on = 'userId')
-features = features[['overDueLabel'] + list(features.columns.drop('overDueLabel'))]
-features.to_csv('bankDetailsFeatures.csv')
+features = pd.merge(features,userInfo,how = 'right',on = 'userId')
+# features = features[['overDueLabel'] + list(features.columns.drop('overDueLabel'))]
+features.to_csv('../dataSets/bankDetailsFeatures.csv')
