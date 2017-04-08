@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 # need to use a method to reconstruct the information table
 # input doubleDf need to have the reset_index() result
 def doubleIndex2single(doubleDf):
+    doubleDf = doubleDf.sort_values('userId')
     index1 = doubleDf.iloc[:,0].unique() # 1st level index
     index2 = doubleDf.iloc[:,1].unique() # 2nd level index
     index1Len = len(index1)
@@ -26,6 +27,8 @@ def doubleIndex2single(doubleDf):
         for idx2 in colName:
             newColName.append(str(idx1) + '_' + str(idx2))
     returnDf = pd.DataFrame(valueArray,columns = newColName)
+    returnDf['userId'] = index1
+    returnDf = returnDf.set_index('userId').reset_index()
     return returnDf
 
 
@@ -40,7 +43,7 @@ browseHist2 = pd.merge(browseHist,userInfo[['userId','loanTime']],how = 'right',
 browseHistBeforeLoan = browseHist2[browseHist2['timeStmp'] <= browseHist2['loanTime']].drop('loanTime',axis =1)
 
 brewseHistGpBeforeLoan = browseHistBeforeLoan.groupby('userId')
-brewseHistDescribeBeforeLoan = brewseHistGpBeforeLoan.describe()
+# brewseHistDescribeBeforeLoan = brewseHistGpBeforeLoan.describe()
 # as the cal time is very slow, save the result into a file for later use
 # brewseHistDescribeBeforeLoan.to_csv('../dataSets/brewseHistDescribeBeforeLoan.csv')
 # brewseHistDescribe = brewseHistDescribe.reset_index()
@@ -52,7 +55,10 @@ brewseHistDescribeBeforeLoan['timeStmp'] = (brewseHistDescribeBeforeLoan['timeSt
 
 # re-construct table to one userId contains only one row
 brewseHistDescribeBeforeLoan = doubleIndex2single(brewseHistDescribeBeforeLoan)
-brewseHistDescribeBeforeLoan.columns += 'BeforeLoan'
+colNamesBeforeLoan = ['userId']
+colNamesBeforeLoan += (list(brewseHistDescribeBeforeLoan.columns[1:]+ 'BeforeLoan'))
+brewseHistDescribeBeforeLoan.columns = colNamesBeforeLoan
+# brewseHistDescribeBeforeLoan.columns[1:] = brewseHistDescribeBeforeLoan.columns[1:]+ 'BeforeLoan'
 # brewseHistBeforeLoan = brewseHistGpBeforeLoan['browsId'].agg({'browsIdCount':'count'})
 
 
@@ -77,4 +83,10 @@ brewseHistDescribeAfterLoan['timeStmp'] = (brewseHistDescribeAfterLoan['timeStmp
 
 # re-construct table to one userId contains only one row
 brewseHistDescribeAfterLoan = doubleIndex2single(brewseHistDescribeAfterLoan)
-brewseHistDescribeAfterLoan.columns += 'AfterLoan'
+colNamesAfterLoan = ['userId']
+colNamesAfterLoan += (list(brewseHistDescribeAfterLoan.columns[1:]+ 'AfterLoan'))
+brewseHistDescribeAfterLoan.columns = colNamesAfterLoan
+
+features = pd.merge(brewseHistDescribeBeforeLoan, brewseHistDescribeAfterLoan, how = 'outer', on = 'userId')
+
+features.to_csv('../dataSets/browseHistFeaturesTrain.csv')
