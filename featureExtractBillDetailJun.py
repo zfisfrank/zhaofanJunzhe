@@ -17,8 +17,14 @@ billDetail2 = pd.merge(billDetail,userInfo[['userId','loanTime']],how = 'right',
 
 billDetailBeforeLoan = billDetail2[billDetail2['timeStmp'] <= billDetail2['loanTime']].drop('loanTime',axis =1)
 billDetailGpBeforeLoan = billDetailBeforeLoan.groupby('userId')
-#describe on hold first
-# billDetailDescribeBeforeLoan = billDetailGpBeforeLoan.describe()
+
+
+ delta 'lastPaidAmt','lastBillAmt'
+ delta 'creditAmount', 'remainedBalThisMon'
+ delta 'remainBal', 'cashCredictLimit'
+ sum minPayThisMon' , 'evolInst'
+
+billDetailDescribeBeforeLoan = billDetailGpBeforeLoan.describe()
 # as the cal time is very slow, save the result into a file for later use
 # billDetailDescribeBeforeLoan.to_csv('../dataSets/billDetailDescribeBeforeLoan.csv')
 # billDetailDescribe = billDetailDescribe.reset_index()
@@ -28,6 +34,6 @@ billDetailGpBeforeLoan = billDetailBeforeLoan.groupby('userId')
 
 #get sum of each column
 billDetailGpBeforeLoanSum = billDetailGpBeforeLoan.sum()
-billDetailGpBeforeLoanSum.columns = ['userId', 'BLbillTimeStmp', 'bankId', 'lastBillAmt', 'lastPaidAmt',
+billDetailGpBeforeLoanSum.columns = ['userId', 'billTimeStmp', 'bankId', 'lastBillAmt', 'lastPaidAmt',
 'creditAmount', 'remainedBalThisMon', 'minPayThisMon', '#ofTrans', 'balThisMon', 'ajtedAmt',
  'evolInst', 'remainBal', 'cashCredictLimit', 'payStus']
