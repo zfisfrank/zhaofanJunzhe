@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 # loan information load
 # userInfo.columns : 'userId', 'gender', 'job', 'education', 'marriage', 'residentialType','loanTime', 'overDueLabel'
 userInfo = pd.read_csv('../dataSets/userInfoTrain.csv').sort_values('userId')
-
+userInfo['loanTime'] = userInfo['loanTime'] // 86400
 # # 银行流水记录：用户id,时间戳,交易类型,交易金额,工资收入标记
 # bankDetailCol = ['userId','timeStamp','transType','transAmount','salaryIncome']
 # bankDetail = pd.read_csv('../dataSets/bankDetailTrain.csv',index_col = False, header  = None, names = bankDetailCol)
@@ -40,7 +40,7 @@ bankBeforeLoan = bankDetail2[bankDetail2['timeStamp']<=bankDetail2['loanTime']] 
 # count of incomes, amout of income, before loan
 incomeGpBefore = bankBeforeLoan[bankBeforeLoan['transType'] == 0].groupby('userId',as_index = False)
 incomeBeforeLoan = incomeGpBefore['transAmount'].agg({'incomeCountBeforeLoan':'count','totalIncomeBeforeLoan':'sum'})
-incomeBeforeLoan = pd.merge(incomeBeforeLoan, incomeGpBefore['timeStamp'].agg({'firstIncomeDayBeforeLoan':'min','lastIncomeDayBeforeLoan':'max'}), how='outer', on = 'userId')
+incomeBeforeLoan = pd.merge(incomeBeforeLoan, incomeGpBefore['timeStamp'].agg({'firstIncomeDayBeforeLoan':'min','lastIncomeDayBeforeLoan':'max'}),how='outer', on = 'userId')
 # count of spend, amount of spend, before loan
 spendGpBefore = bankBeforeLoan[bankBeforeLoan['transType'] == 1].groupby('userId',as_index = False)
 spendBeforeLoan = spendGpBefore['transAmount'].agg({'spendCountBeforeLoan':'count','totalSpendBeforeLoan':'sum'})
