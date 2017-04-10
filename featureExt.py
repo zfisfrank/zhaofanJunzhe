@@ -10,6 +10,6 @@ bankDetail = pd.read_csv('../initData/bank_detail_train.txt',index_col =False,
     header  = None, names = bankDetailCol).sort_values('userId')
 # bankDetail = bankDetail.reset_index()
 # bankDetail group
-bankDetailGp = bankDetail.groupby('userId')
+# bankDetailGp = bankDetail.groupby('userId')
 
-bankDetailTotalIncome = bankDetailGp.agg
+bankDetailTotalIncome = bankDetail[bankDetail['transType'] == 0].groupby('userId').agg({'incomeCountBeforeLoan':'count','totalIncomeBeforeLoan':'sum'})
