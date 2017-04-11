@@ -45,11 +45,11 @@ browseHistBeforeLoan = browseHist2[browseHist2['timeStmp'] <= browseHist2['loanT
 brewseHistGpBeforeLoan = browseHistBeforeLoan.groupby('userId')
 # brewseHistDescribeBeforeLoan = brewseHistGpBeforeLoan.describe()
 # as the cal time is very slow, save the result into a file for later use
-# brewseHistDescribeBeforeLoan.to_csv('../dataSets/brewseHistDescribeBeforeLoan.csv')
-# brewseHistDescribe = brewseHistDescribe.reset_index()
+# brewseHistDescribeBeforeLoan.to_csv('../describes/brewseHistDescribeBeforeLoan.csv')
+# brewseHistDescribeBeforeLoan = brewseHistDescribeBeforeLoan.reset_index()
 
 # just read pre-processed 'brewseHistDescribe'
-brewseHistDescribeBeforeLoan = pd.read_csv('../dataSets/brewseHistDescribeBeforeLoan.csv')
+brewseHistDescribeBeforeLoan = pd.read_csv('../describes/brewseHistDescribeBeforeLoan.csv')
  # change time stamp into hours, so showing hour information
 brewseHistDescribeBeforeLoan['timeStmp'] = (brewseHistDescribeBeforeLoan['timeStmp']//3600)%24
 
@@ -73,11 +73,11 @@ browseHistAfterLoan = browseHist2[browseHist2['timeStmp'] > browseHist2['loanTim
 brewseHistGpAfterLoan = browseHistAfterLoan.groupby('userId')
 brewseHistDescribeAfterLoan = brewseHistGpAfterLoan.describe()
 # as the cal time is very slow, save the result into a file for later use
-# brewseHistDescribeAfterLoan.to_csv('../dataSets/brewseHistDescribeAfterLoan.csv')
-# brewseHistDescribe = brewseHistDescribe.reset_index()
+brewseHistDescribeAfterLoan.to_csv('../describes/brewseHistDescribeAfterLoan.csv')
+brewseHistDescribeAfterLoan = brewseHistDescribeAfterLoan.reset_index()
 
 # just read pre-processed 'brewseHistDescribe'
-brewseHistDescribeAfterLoan = pd.read_csv('../dataSets/brewseHistDescribeAfterLoan.csv')
+brewseHistDescribeAfterLoan = pd.read_csv('../describes/brewseHistDescribeAfterLoan.csv')
  # change time stamp into hours, so showing hour information
 brewseHistDescribeAfterLoan['timeStmp'] = (brewseHistDescribeAfterLoan['timeStmp']//3600)%24
 

@@ -31,15 +31,11 @@ def ks(y_predicted, y_true):
     return 'ks',abs(fpr - tpr).max()
 
 # read the features
-billDetailFeaturesTrain = pd.read_csv(
-    '../featureFolderTrain/billDetailFeaturesTrain.csv',index_col = 0).set_index('userId')
-bankDetailsFeaturesTrain = pd.read_csv(
-    '../featureFolderTrain/bankDetailsFeaturesTrain.csv',index_col = 0).set_index('userId')
+billDetailFeaturesTrain = pd.read_csv('../featureFolderTrain/billDetailFeaturesTrain.csv',index_col = 0).set_index('userId')
+bankDetailsFeaturesTrain = pd.read_csv('../featureFolderTrain/bankDetailsFeaturesTrain.csv',index_col = 0).set_index('userId').drop('Unnamed: 0.1',axis = 1)
 
-browseHistFeaturesTrain = pd.read_csv(
-    '../featureFolderTrain/browseHistFeaturesTrain.csv',index_col = 0).set_index('userId')
-fullInfoTrain = pd.read_csv(
-    '../featureFolderTrain/fullInfoTrain.csv',index_col = 0).set_index('userId')
+browseHistFeaturesTrain = pd.read_csv('../featureFolderTrain/browseHistFeaturesTrain.csv',index_col = 0).set_index('userId')
+fullInfoTrain = pd.read_csv('../featureFolderTrain/fullInfoTrain.csv',index_col = 0).set_index('userId')
 #
 # pd.Series(fullInfoTrain.columns).align(pd.Series(bankDetailsFeaturesTrain.columns),join = 'inner')
 fullInfoTrain = fullInfoTrain['overDueLabel']
@@ -50,15 +46,29 @@ allData = pd.concat([billDetailFeaturesTrain, bankDetailsFeaturesTrain, browseHi
 allData = allData.join(fullInfoTrain,how = 'right')
 allData = allData.replace(np.inf, np.nan)
 allData = allData.dropna(axis = 1, how = 'all')
+
 allData = allData.fillna(allData.mean())
 
-# allData.to_csv('../featureFolderTrain/allTrain.csv')
+allData.to_csv('../featureFolderTrain/allTrain.csv')
 allData = pd.read_csv('../featureFolderTrain/allTrain.csv')
 allData = allData.drop('loanTime',axis = 1)
 
+fullInfoTrain = fullInfoTrain.reset_index()
+fullInfoTrain1Id = fullInfoTrain[fullInfoTrain['overDueLabel'] == 1]
+# fullInfoTrain1Id = pd.concat([fullInfoTrain1Id,fullInfoTrain1Id,fullInfoTrain1Id,fullInfoTrain1Id,fullInfoTrain1Id,fullInfoTrain1Id,fullInfoTrain1Id,fullInfoTrain1Id,fullInfoTrain1Id])
+fullInfoTrain0Id = fullInfoTrain[fullInfoTrain['overDueLabel'] == 0]
 
-def testAlgo(allData):
-    trainData,valiData = train_test_split(allData,test_size = 0.2)
+trainId1,valiId1 = train_test_split(fullInfoTrain1Id, test_size=0.2)
+trainId1 = pd.concat([trainId1,trainId1,trainId1,trainId1,trainId1,trainId1,trainId1,trainId1])
+trainId0,valiId0 = train_test_split(fullInfoTrain0Id, test_size=0.2)
+
+trainId = pd.concat([trainId0,trainId1]).loc[:,'userId']
+valiId = pd.concat([valiId0,valiId1]).loc[:,'userId']
+
+def testAlgo(allData, trainId, valiId):
+    # trainData,valiData = train_test_split(allData,test_size = 0.2)
+    trainData = allData.loc[trainId].dropna(how='all')
+    valiData = allData.loc[valiId].dropna(how='all')
     trainTarget = trainData['overDueLabel']
     trainFeatures = trainData.drop('overDueLabel',axis = 1)
     valiTarget = valiData['overDueLabel']
@@ -73,14 +83,22 @@ def testAlgo(allData):
     trainResult = rf.predict(trainFeatures)
     return[valiFeatures.columns, valiResult,valiTarget,trainResult,trainTarget,rf]
 
+
 print(ks(valiResult,valiTarget))
 print(ks(trainResult,trainTarget))
+sum(valiResult[valiTarget == 1] == 1)/len(valiTarget)
 
+# print((valiResult == valiTarget).sum()/len(valiTarget))
 imptIdx = rfAll.feature_importances_
-useAbleCol = featureCol[rfAll.feature_importances_>pd.DataFrame(rfAll.feature_importances_).describe([0.9]).loc['90%'].loc[0]]
+useAbleCol = featureCol[rfAll.feature_importances_>pd.DataFrame(rfAll.feature_importances_).describe([0.95]).loc['95%'].loc[0]]
+# useAbleCol = featureCol[rf.feature_importances_>pd.DataFrame(rf.feature_importances_).describe([0.9]).loc['90%'].loc[0]]
 useAbleCol = list(useAbleCol)
 useAbleCol.append('overDueLabel')
 adjuestData = allData[useAbleCol]
-[featureCol,valiResult,valiTarget,trainResult,trainTarget,rf] = testAlgo(adjuestData)
+[featureCol2,valiResult2,valiTarget2,trainResult2,trainTarget2,rf] = testAlgo(adjuestData,trainId,valiId)
+
+sum(valiResult2[valiTarget2 == 1] == 1)/len(valiTarget2)
+print(ks(valiResult2,valiTarget2))
+print(ks(trainResult2,trainTarget2))
 # [valiResult,trainTarget,rf] = result
-[featureCol,valiResult,valiTarget,trainResult,trainTarget,rfAll] = testAlgo(allData)
+[featureCol,valiResult,valiTarget,trainResult,trainTarget,rfAll] = testAlgo(allData,trainId,valiId)

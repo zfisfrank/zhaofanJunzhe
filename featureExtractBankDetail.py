@@ -68,14 +68,12 @@ featureBeforeLoan['overSpendBeforeLoan'] = featureBeforeLoan['totalSpendBeforeLo
 # plt.show()
 
 # average Income per month
-featureBeforeLoan['avgIncomeBeforeLoan'] = featureBeforeLoan['totalIncomeBeforeLoan']\
-    /((featureBeforeLoan['lastIncomeDayBeforeLoan'] - featureBeforeLoan['firstIncomeDayBeforeLoan'])/365 * 12)
+featureBeforeLoan['avgIncomeBeforeLoan'] = featureBeforeLoan['totalIncomeBeforeLoan']/((featureBeforeLoan['lastIncomeDayBeforeLoan'] - featureBeforeLoan['firstIncomeDayBeforeLoan'])/365 * 12)
 # plt.plot(featureBeforeLoan['userId'] ,featureBeforeLoan['avgIncomeBeforeLoan'] )
 # plt.show()
 
 # average salary per month
-featureBeforeLoan['avgSalaryIncomeBeforeLoan'] = featureBeforeLoan['totalSalaryBeforeLoan']\
-    /((featureBeforeLoan['lastIncomeDayBeforeLoan'] - featureBeforeLoan['firstIncomeDayBeforeLoan'])/365 * 12)
+featureBeforeLoan['avgSalaryIncomeBeforeLoan'] = featureBeforeLoan['totalSalaryBeforeLoan']/((featureBeforeLoan['lastIncomeDayBeforeLoan'] - featureBeforeLoan['firstIncomeDayBeforeLoan'])/365 * 12)
 # plt.plot(featureBeforeLoan['userId'] ,featureBeforeLoan['avgIncomeBeforeLoan'] )
 # plt.plot(featureBeforeLoan['userId'] ,featureBeforeLoan['avgSalaryIncomeBeforeLoan'] )
 # plt.legend(loc='upper left')
@@ -86,13 +84,9 @@ featureBeforeLoan['salaryIncomePercentileBeforeLoan'] = featureBeforeLoan['total
 
 # ============new features added
 # salary mean, median of all salary datas
-featureBeforeLoan = pd.merge(featureBeforeLoan, salaryGpBefore['transAmount'].agg({'salaryMeanBeforeLoan':'mean',\
-    'salaryMedianBeforeLoan':'median','salaryStdBeforeLoan':'std'}),\
-    how = 'outer', on = 'userId')
+featureBeforeLoan = pd.merge(featureBeforeLoan, salaryGpBefore['transAmount'].agg({'salaryMeanBeforeLoan':'mean','salaryMedianBeforeLoan':'median','salaryStdBeforeLoan':'std'}),how = 'outer', on = 'userId')
 # expense mean, median, std
-featureBeforeLoan = pd.merge(featureBeforeLoan, spendGpBefore['transAmount'].agg({'spendMeanBeforeLoan':'mean',\
-    'spendMedianBeforeLoan':'median','spendStdBeforeLoan':'std'}),\
-    how = 'outer', on = 'userId')
+featureBeforeLoan = pd.merge(featureBeforeLoan, spendGpBefore['transAmount'].agg({'spendMeanBeforeLoan':'mean','spendMedianBeforeLoan':'median','spendStdBeforeLoan':'std'}),how = 'outer', on = 'userId')
 
 # ==========================================================================================================================#
 # ==========================================================================================================================#
@@ -135,14 +129,12 @@ featureAfterLoan['overSpendAfterLoan'] = featureAfterLoan['totalSpendAfterLoan']
 # plt.show()
 
 # average Income per month
-featureAfterLoan['avgIncomeAfterLoan'] = featureAfterLoan['totalIncomeAfterLoan']\
-    /((featureAfterLoan['lastIncomeDayAfterLoan'] - featureAfterLoan['firstIncomeDayAfterLoan'])/365 * 12)
+featureAfterLoan['avgIncomeAfterLoan'] = featureAfterLoan['totalIncomeAfterLoan']/((featureAfterLoan['lastIncomeDayAfterLoan'] - featureAfterLoan['firstIncomeDayAfterLoan'])/365 * 12)
 # plt.plot(featureAfterLoan['userId'] ,featureAfterLoan['avgIncomeAfterLoan'] )
 # plt.show()
 
 # average Income per month
-featureAfterLoan['avgSalaryIncomeAfterLoan'] = featureAfterLoan['totalSalaryAfterLoan']\
-    /((featureAfterLoan['lastIncomeDayAfterLoan'] - featureAfterLoan['firstIncomeDayAfterLoan'])/365 * 12)
+featureAfterLoan['avgSalaryIncomeAfterLoan'] = featureAfterLoan['totalSalaryAfterLoan']/((featureAfterLoan['lastIncomeDayAfterLoan'] - featureAfterLoan['firstIncomeDayAfterLoan'])/365 * 12)
 # plt.plot(featureAfterLoan['userId'] ,featureAfterLoan['avgIncomeAfterLoan'] )
 # plt.plot(featureAfterLoan['userId'] ,featureAfterLoan['avgSalaryIncomeAfterLoan'] )
 # plt.legend(loc='upper left')
@@ -154,16 +146,12 @@ featureAfterLoan['salaryIncomePercentileAfterLoan'] = featureAfterLoan['totalSal
 # plt.show()
 
 # salary mean, median of all salary datas
-featureAfterLoan = pd.merge(featureAfterLoan, salaryGpBefore['transAmount'].agg({'salaryMeanAfterLoan':'mean',\
-    'salaryMedianAfterLoan':'median','salaryStdAfterLoan':'std'}),\
-    how = 'outer', on = 'userId')
+featureAfterLoan = pd.merge(featureAfterLoan, salaryGpBefore['transAmount'].agg({'salaryMeanAfterLoan':'mean','salaryMedianAfterLoan':'median','salaryStdAfterLoan':'std'}),how = 'outer', on = 'userId')
 # expense mean, median, std
-featureAfterLoan = pd.merge(featureAfterLoan, spendGpBefore['transAmount'].agg({'spendMeanAfterLoan':'mean',\
-    'spendMedianAfterLoan':'median','spendStdAfterLoan':'std'}),\
-    how = 'outer', on = 'userId')
+featureAfterLoan = pd.merge(featureAfterLoan, spendGpBefore['transAmount'].agg({'spendMeanAfterLoan':'mean','spendMedianAfterLoan':'median','spendStdAfterLoan':'std'}),how = 'outer', on = 'userId')
 
 
 features = pd.merge(featureBeforeLoan,featureAfterLoan,how = 'outer', on ='userId')
 features = pd.merge(features,userInfo,how = 'right',on = 'userId')
 # features = features[['overDueLabel'] + list(features.columns.drop('overDueLabel'))]
-features.to_csv('../dataSets/bankDetailsFeatures.csv')
+features.to_csv('../featureFolderTrain/bankDetailsFeatures.csv')

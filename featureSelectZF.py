@@ -17,7 +17,7 @@ from sklearn.preprocessing import OneHotEncoder
 # import xgboost as xgb
 # plot feature importance manually
 from numpy import loadtxt
-from xgboost import XGBClassifier
+# from xgboost import XGBClassifier
 import matplotlib.pyplot as plt
 from scipy.stats import ks_2samp
 
@@ -29,8 +29,7 @@ def ks(y_predicted, y_true):
     return 'ks',abs(fpr - tpr).max()
 
 # read the features
-billDetailFeaturesTrain = pd.read_csv(
-    '../featureFolderTrain/billDetailFeaturesTrain.csv')
+billDetailFeaturesTrain = pd.read_csv('../featureFolderTrain/billDetailFeaturesTrain.csv')
 billDetailFeaturesTrain = billDetailFeaturesTrain.drop('Unnamed: 0',axis = 1).sort_values('userId')
 billDetailFeaturesTrain = billDetailFeaturesTrain.fillna(billDetailFeaturesTrain.mean())
 # read target
@@ -72,9 +71,9 @@ from sklearn import metrics
 
 
 print(ks(valiResult,testTarget))
-print(ks_2samp(valiResult,testTarget))
+# print(ks_2samp(valiResult,testTarget))
 print(ks(trainResult,trainTarget))
-print(ks_2samp(trainResult,trainTarget))
+# print(ks_2samp(trainResult,trainTarget))
 
 # trueFeatureTrain = trainFeatures[trainTarget==1]
 # trueTargetTrain = trainTarget[trainTarget==1]

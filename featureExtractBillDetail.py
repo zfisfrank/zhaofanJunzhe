@@ -46,10 +46,10 @@ billDetail2['remainBalVscashCreditLimit'] = billDetail2['remainBal'] - billDetai
 billDetailBeforeLoan = billDetail2[billDetail2['billTimeStmp'] <= billDetail2['loanTime']].drop('loanTime',axis =1)
 billDetailGpBeforeLoan = billDetailBeforeLoan.groupby('userId')
 billFeatureBeforeLoan = billDetailGpBeforeLoan['minPayThisMon'].agg({'minMonthPaySum':'sum'}).reset_index()
-billFeatureBeforeLoan =pd.merge(billFeatureBeforeLoan, billDetailGpBeforeLoan['evolInst'].agg({'evolInstSum':'sum'}).reset_index(), \
-    how = 'outer', on = 'userId')
+billFeatureBeforeLoan =pd.merge(billFeatureBeforeLoan, billDetailGpBeforeLoan['evolInst'].agg({'evolInstSum':'sum'}).reset_index(),how = 'outer', on = 'userId')
 # billDescribeBeforeLoan = billDetailGpBeforeLoan.describe()
-# billDescribeBeforeLoan.to_csv('../dataSets/billDescribeBeforeLoan.csv')
+# billDescribeBeforeLoan.to_csv('../describes/billDescribeBeforeLoan.csv')
+# billDescribeBeforeLoan = billDescribeBeforeLoan.reset_index()
 billDescribeBeforeLoan = pd.read_csv('../dataSets/billDescribeBeforeLoan.csv')
 # a = doubleIndex2single(billDescribeBeforeLoan.reset_index())
 billDescribeBeforeLoan = doubleIndex2single(billDescribeBeforeLoan)
@@ -57,6 +57,8 @@ billFeatureBeforeLoan = pd.merge(billFeatureBeforeLoan, billDescribeBeforeLoan, 
 colNamesBeforeLoan = ['userId']
 colNamesBeforeLoan += (list(billFeatureBeforeLoan.columns[1:]+ 'BeforeLoan'))
 billFeatureBeforeLoan.columns = colNamesBeforeLoan
+
+billFeatureBeforeLoan = pd.read_csv('billFeatureBeforeLoan.csv')
 # ==========================================================================================================================#
 # ==========================================================================================================================#
 # ============================================features after the loan time=================================================#
@@ -66,11 +68,10 @@ billDetailAfterLoan = billDetail2[billDetail2['billTimeStmp'] > billDetail2['loa
 billDetailGpAfterLoan = billDetailAfterLoan.groupby('userId')
 # billFeatureAfterLoan = billDetailGpAfterLoan[['minPayThisMon','evolInst']].agg({'minMonthPaySum':'sum','evolInstSum':'sum'})
 billFeatureAfterLoan = billDetailGpAfterLoan['minPayThisMon'].agg({'minMonthPaySum':'sum'}).reset_index()
-billFeatureAfterLoan =pd.merge(billFeatureAfterLoan, billDetailGpAfterLoan['evolInst'].agg({'evolInstSum':'sum'}).reset_index(), \
-    how = 'outer', on = 'userId')
+billFeatureAfterLoan =pd.merge(billFeatureAfterLoan, billDetailGpAfterLoan['evolInst'].agg({'evolInstSum':'sum'}).reset_index(), how = 'outer', on = 'userId')
 # billDescribeAfterLoan = billDetailGpAfterLoan.describe()
-# billDescribeAfterLoan.to_csv('../dataSets/billDescribeAfterLoan.csv')
-billDescribeAfterLoan = pd.read_csv('../dataSets/billDescribeAfterLoan.csv')
+# billDescribeAfterLoan.to_csv('../describes/billDescribeAfterLoan.csv')
+billDescribeAfterLoan = pd.read_csv('../describes/billDescribeAfterLoan.csv')
 billDescribeAfterLoan = doubleIndex2single(billDescribeAfterLoan)
 billFeatureAfterLoan = pd.merge(billFeatureAfterLoan,billDescribeAfterLoan, how = 'outer', on = 'userId')
 colNamesAfterLoan = ['userId']
@@ -78,4 +79,4 @@ colNamesAfterLoan += (list(billFeatureAfterLoan.columns[1:]+ 'AfterLoan'))
 billFeatureAfterLoan.columns = colNamesAfterLoan
 
 billDetailFeatures = pd.merge(billFeatureBeforeLoan, billFeatureAfterLoan, how = 'outer', on = 'userId')
-billDetailFeatures.to_csv('../dataSets/billDetailFeatures.csv')
+billDetailFeatures.to_csv('../featureFolderTrain/billDetailFeatures.csv')

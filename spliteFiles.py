@@ -52,8 +52,10 @@ testTarget.to_csv('../dataSets/testTarget.csv')
 fullInfo = pd.merge(userInfo,overDue,how = 'outer',on = 'userId') # should not matter, but inner join should be more approprate
 fullInfoTrain = fullInfo.set_index('userId').loc[trainId].sort_index().reset_index()
 fullInfoTest =fullInfo.set_index('userId').loc[testId].sort_index().reset_index()
-fullInfoTrain.to_csv('../dataSets/fullInfoTrain.csv')
-fullInfoTest.to_csv('../dataSets/fullInfoTest.csv')
+fullInfoTrain['loanTime'] = fullInfoTrain['loanTime'] // 86400
+fullInfoTest['loanTime'] = fullInfoTest['loanTime'] // 86400
+fullInfoTrain.to_csv('../featureFolderTrain/fullInfoTrain.csv')
+fullInfoTest.to_csv('../featureFolderTest/fullInfoTest.csv')
 # read bankDetail and split according to trainId/testId
 # ================================================================================#
 # ================================================================================#
