@@ -6,9 +6,19 @@ import pandas as pd
 from scipy.stats import pearsonr
 
 # normalize to 0~1, first: dataframe to normalize, 2nd, ignore column name list
-def normalize(df, despiteCol = []):
+def normalize(df, despiteCol = ['userId']):
     interstedCol = df.columns[~df.columns.isin(despiteCol)]
     result = (df[interstedCol] - df[interstedCol].min())/(df[interstedCol].max() - df[interstedCol].min())
+    result = pd.concat([df[despiteCol],result],axis = 1)
+    # df = (df - df.min())/(df.max() - df.min())
+    result = result.dropna(how ='all',axis = 1)
+    return result
+
+# normalize to number of std, first: dataframe to normalize, 2nd, ignore column name list
+def stdNormalize(df, despiteCol = ['userId']):
+    interstedCol = df.columns[~df.columns.isin(despiteCol)]
+    # result = (df[interstedCol] - df[interstedCol].min())/(df[interstedCol].max() - df[interstedCol].min())
+    result = (df[interstedCol] - df[interstedCol].mean())/df[interstedCol].std()
     result = pd.concat([df[despiteCol],result],axis = 1)
     # df = (df - df.min())/(df.max() - df.min())
     result = result.dropna(how ='all',axis = 1)
