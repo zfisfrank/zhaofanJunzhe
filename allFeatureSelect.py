@@ -51,7 +51,9 @@ allData = allData.fillna(allData.mean())
 
 allData.to_csv('../featureFolderTrain/allTrain.csv')
 allData = pd.read_csv('../featureFolderTrain/allTrain.csv')
-allData = allData.drop('loanTime',axis = 1)
+# allData = allData.drop('loanTime',axis = 1)
+
+
 
 fullInfoTrain = fullInfoTrain.reset_index()
 fullInfoTrain1Id = fullInfoTrain[fullInfoTrain['overDueLabel'] == 1]
