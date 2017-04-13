@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="169cf5ca-3c65-4587-8cea-633e7d5a365c" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/billBankMonthDataTrain.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/learning2.py" afterPath="$PROJECT_DIR$/learning2.py" />
     </list>
@@ -67,18 +68,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="learning2.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="learning2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/learning2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="90" column="23" lean-forward="false" selection-start-line="90" selection-start-column="23" selection-end-line="90" selection-end-column="23" />
+            <state relative-caret-position="168">
+              <caret line="95" column="0" lean-forward="true" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
-                <element signature="e#424#596#0" expanded="false" />
-                <element signature="e#622#1194#0" expanded="false" />
-                <element signature="e#1220#1878#0" expanded="false" />
-                <element signature="e#2210#2718#0" expanded="false" />
+                <element signature="e#2212#2720#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="billBankMonthDataTrain.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/billBankMonthDataTrain.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -127,6 +135,8 @@
       <find>reshape</find>
       <find>tBank</find>
       <find>dropnaByPrecent</find>
+      <find>allData =</find>
+      <find>RandomOverSampler</find>
     </findStrings>
     <replaceStrings>
       <replace>txt</replace>
@@ -211,6 +221,11 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -514,7 +529,14 @@
       <option name="project" value="LOCAL" />
       <updated>1492067076333</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="modified learning2 for checking the monthly data to KS value influence">
+      <created>1492082149556</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1492082149556</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -590,7 +612,8 @@
     <MESSAGE value="modified normalization to have list of unselected column option2" />
     <MESSAGE value="added stdNormalize" />
     <MESSAGE value="added allDataTest.py, which will convert data in seconeds to in month" />
-    <option name="LAST_COMMIT_MESSAGE" value="added allDataTest.py, which will convert data in seconeds to in month" />
+    <MESSAGE value="modified learning2 for checking the monthly data to KS value influence" />
+    <option name="LAST_COMMIT_MESSAGE" value="modified learning2 for checking the monthly data to KS value influence" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -608,14 +631,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/featureExtractBankDetail.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1455">
-          <caret line="99" column="13" lean-forward="false" selection-start-line="99" selection-start-column="13" selection-end-line="99" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/spliteFiles.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="780">
@@ -1047,15 +1062,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/learning2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="90" column="23" lean-forward="false" selection-start-line="90" selection-start-column="23" selection-end-line="90" selection-end-column="23" />
+        <state relative-caret-position="168">
+          <caret line="95" column="0" lean-forward="true" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
-            <element signature="e#424#596#0" expanded="false" />
-            <element signature="e#622#1194#0" expanded="false" />
-            <element signature="e#1220#1878#0" expanded="false" />
-            <element signature="e#2210#2718#0" expanded="false" />
+            <element signature="e#2212#2720#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billBankMonthDataTrain.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
