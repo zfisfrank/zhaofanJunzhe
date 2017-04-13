@@ -29,3 +29,10 @@ def pearCorr(df,y):
     result =  df.apply(lambda x: pearsonr(x,y)).apply(pd.Series)
     result.set_axis(1,['Pearson’s correlation coefficient','2-tailed p-value'])
     return result
+
+from sklearn import metrics
+def ks(y_predicted, y_true):
+    label=y_true
+    #label = y_true.get_label()
+    fpr,tpr,thres = metrics.roc_curve(label,y_predicted,pos_label=1)
+    return 'ks',abs(fpr - tpr).max()

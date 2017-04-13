@@ -92,7 +92,7 @@ sum(valiResult[valiTarget == 1] == 1)/len(valiTarget)
 
 # print((valiResult == valiTarget).sum()/len(valiTarget))
 imptIdx = rfAll.feature_importances_
-useAbleCol = featureCol[rfAll.feature_importances_>pd.DataFrame(rfAll.feature_importances_).describe([0.95]).loc['95%'].loc[0]]
+useAbleCol = featureCol[rfAll.feature_importances_> pd.DataFrame(rfAll.feature_importances_).describe([0.95]).loc['95%'].loc[0]]
 # useAbleCol = featureCol[rf.feature_importances_>pd.DataFrame(rf.feature_importances_).describe([0.9]).loc['90%'].loc[0]]
 useAbleCol = list(useAbleCol)
 useAbleCol.append('overDueLabel')
@@ -104,3 +104,8 @@ print(ks(valiResult2,valiTarget2))
 print(ks(trainResult2,trainTarget2))
 # [valiResult,trainTarget,rf] = result
 [featureCol,valiResult,valiTarget,trainResult,trainTarget,rfAll] = testAlgo(allData,trainId,valiId)
+
+from modifyFun import pearCorr
+featureMark = pearCorr(allData.drop(['overDueLabel','userId'],axis = 1), allData['overDueLabel'])
+featureMark = featureMark['Pearson’s correlation coefficient'].abs()
+useAbleCol = featureMark[featureMark>=0.01311].index
