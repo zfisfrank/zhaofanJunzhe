@@ -4,6 +4,10 @@ from sklearn.cross_validation import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 from sklearn import metrics
+from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier
+from imblearn.over_sampling import RandomOverSampler
+import numpy as np
 
 def ks(y_predicted, y_true):
     label=y_true
@@ -11,50 +15,89 @@ def ks(y_predicted, y_true):
     fpr,tpr,thres = metrics.roc_curve(label,y_predicted,pos_label=1)
     return 'ks',abs(fpr - tpr).max()
 
-from learning1 import DataCastle
-sol = DataCastle()
-user_info = sol.readUserInfo()
-bank_detail = sol.readBankDetail()
-bill_detail = sol.readBillDetail()
-loan_time = sol.readLoanTime()
-browse_history = sol.readBrowseHistory()
-target = sol.readTarget()
+    # read the datas
+def readMoneyData():
+    moneyTotalFlat1 = pd.read_csv('../newFeatures/moneyTotalFlat1.csv')
+    moneyTotalFlat1 = moneyTotalFlat1.set_index('userId')
+    moneyTotalFlat1 = moneyTotalFlat1.dropna(axis = 1, how = 'all')
+    moneyTotalFlat1 = moneyTotalFlat1.dropna(axis = 0, how = 'all')
+    moneyTotalFlat2 = pd.read_csv('../newFeatures/moneyTotalFlat2.csv')
+    moneyTotalFlat2 = moneyTotalFlat2.set_index('userId')
+    moneyTotalFlat2 = moneyTotalFlat2.dropna(axis = 1, how = 'all')
+    moneyTotalFlat2 = moneyTotalFlat2.dropna(axis = 0, how = 'all')
+    return [moneyTotalFlat1,moneyTotalFlat2]
 
-loan_data = user_info.join(bank_detail,how='outer')
-loan_data = loan_data.join(bill_detail,how='outer')
-loan_data = loan_data.join(browse_history,how='outer')
-loan_data = loan_data.join(loan_time,how='outer')
-loan_data = loan_data.fillna(0.0)
+def readUserInfo():
+    fullInfoTrain = pd.read_csv('../featureFolderTrain/fullInfoTrain.csv', index_col=0).set_index('userId')
+    userInfo = pd.read_csv('train/user_info_train.txt', names=['userId','gender', 'job', 'education', 'marriage', 'residentialType']).set_index('userId')
+    labels = pd.read_csv('train/overdue_train.txt',names =['userId','overDueLabel']).set_index('userId')
+    loanTime = pd.read_csv('train/loan_time_train.txt',names =['userId','loanTime']).set_index('userId')
+    fullInfo = pd.concat([userInfo,loanTime],axis = 1)
+    # fullInfo = fullInfoTrain.drop('overDueLabel', axis = 1)
+    # labels = fullInfoTrain['overDueLabel']
+    return [fullInfo,labels]
 
-#对数据进行归一化
-datas = loan_data.values
-datas = preprocessing.scale(datas)
-col_names = list(loan_data.columns)
-nums=0
-for col in col_names:
-    loan_data.loc[:,[col]] = datas[:,nums]
-    nums += 1
+def combineAllInfo():
+    [moneyTotalFlat1, moneyTotalFlat2] = readMoneyData()
+    [fullInfo,labels] = readUserInfo()
+    allData = pd.concat([fullInfo,moneyTotalFlat1],axis = 1)
+    return [allData,labels]
 
-#对数据进行划分并且进行训练
-train = loan_data.iloc[0: 55596, :]
-test = loan_data.iloc[55596:, :]
-train_X, test_X, train_y, test_y = train_test_split(train,target,test_size = 0.2,random_state = 0)
-train_y = train_y['label']
-test_y = test_y['label']
-lr_model = LogisticRegression(C = 1.0,penalty = 'l2')
-lr_model.fit(train_X, train_y)
-#验证集进行预测
-pred_test = lr_model.predict(test_X)
-#对预测结果进行评估
-print(classification_report(test_y, pred_test))
-sum(pred_test[test_y == 1] == 1)/len(pred_test)
+def dropnaByPrecent(allData,axisVal=0,nonNanPercentile = 0.001): #axis = 0 for drop row, axisVal = 1 for drop columns
+    # nonNanPercentile = 0.
+    [rowThresh,colThresh] = list(allData.shape)
+    rowThresh = np.ceil(rowThresh * nonNanPercentile)
+    colThresh = np.ceil(colThresh * nonNanPercentile)
+    threshs = [rowThresh,colThresh]
+    dropName =[' row',' column']
+    print('drop ', dropName[axisVal], ' minimum data', threshs[axisVal])
+    allData2 = allData.dropna(axis=axisVal, thresh = threshs[axisVal] )
+    print('before drop shape: ',allData.shape)
+    print('after drop shape: ', allData2.shape)
+    return allData2
 
-ks(test_y, pred_test)
-#对测试集生成结果并存储为csv格式
-pred = lr_model.predict_proba(test)
-result = pd.DataFrame(pred)
-result.index = test.index
-result.columns = ['0', 'probability']
-result.drop('0',axis = 1,inplace = True)
-print(result.head(5))
-    # result.to_csv(sol.result)
+def find01Data(allData,labels): # return [dF with label = 1, dF with label = 0]
+    userId1 = labels[labels == 1].index
+    userId0 = labels[labels == 0].index
+    return [allData.loc[userId1], allData.loc[userId0]]
+
+# usable drop rate @ 0.0025
+def modifyAllData(allData,labels):
+    all1Data,all0Data = find01Data(allData,labels)
+    all0Data = dropnaByPrecent(all0Data,nonNanPercentile=0.001) # as 1 labels are too small, only drop 0 labeled data
+    return[all1Data,all0Data]
+
+def splitData(allData,labels):
+    all1Data,all0Data = modifyAllData(allData,labels)
+    all1DataTrain,all1DataVali = train_test_split(all1Data,test_size = 0.5)
+    all0DataTrain,all0DataVali = train_test_split(all0Data,test_size = 0.5)
+    allDataTrain = pd.concat([all1DataTrain,all0DataTrain])
+    allDataVali = pd.concat([all1DataVali,all0DataVali])
+    trainId = list(allDataTrain.index)
+    valiId = list(allDataVali.index)
+    trainLabel = labels.loc[trainId]
+    valiLabel = labels.loc[valiId]
+    return[allDataTrain,allDataVali,trainLabel,valiLabel]
+
+def allDataOverSampling(allData,labels):
+label1Id = labels[labels['overDueLabel'] == 1].index
+data1 = allData.loc[label1Id]
+
+def testAlgo(allData, labels):
+allDataTrain, allDataVali, trainLabel, valiLabel = splitData(allData,labels)
+ros = RandomOverSampler()
+allDataTrain,trainLabel = ros.fit_sample(allDataTrain,trainLabel)
+
+allDataTrain = allDataTrain.fillna(allDataTrain.mean())
+allDataTrain = allDataTrain.fillna(-1)
+allDataVali = allDataVali.fillna(allDataVali.mean())
+allDataVali = allDataVali.fillna(-1)
+rf = RandomForestClassifier(n_estimators=50)
+rf = SVC()
+rf.fit(allDataTrain,trainLabel)
+valiResult = rf.predict(allDataVali)
+trainResult = rf.predict(allDataTrain)
+print(ks(valiResult,valiLabel))
+print(ks(trainResult,trainLabel))
+return [allDataVali, valiResult,valiLabel,trainResult,trainLabel,rf]
+
