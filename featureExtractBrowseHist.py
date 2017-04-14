@@ -32,8 +32,22 @@ def doubleIndex2single(doubleDf):
     return returnDf
 
 
-userInfo = pd.read_csv('../dataSets/userInfoTrain.csv').sort_values('userId')
-browseHist = pd.read_csv('../dataSets/browseHistTrain.csv')
+
+def readUserInfoOne():
+    # fullInfoTrain = pd.read_csv('../featureFolderTrain/fullInfoTrain.csv', index_col=0).set_index('userId')
+    userInfo = pd.read_csv('train/user_info_train.txt', names=['userId','gender', 'job', 'education', 'marriage', 'residentialType']).set_index('userId')
+    labels = pd.read_csv('train/overdue_train.txt',names =['userId','overDueLabel']).set_index('userId')
+    loanTime = pd.read_csv('train/loan_time_train.txt',names =['userId','loanTime']).set_index('userId')
+    fullInfo = pd.concat([userInfo,loanTime,labels],axis = 1)
+    # fullInfo = fullInfoTrain.drop('overDueLabel', axis = 1)
+    # labels = fullInfoTrain['overDueLabel']
+    return fullInfo
+
+percentiles = list(np.arange(0.1,1,0.1))
+# userInfo = pd.read_csv('../dataSets/userInfoTrain.csv').sort_values('userId')
+userInfo = readUserInfoOne().reset_index()
+# browseHist = pd.read_csv('../dataSets/browseHistTrain.csv')
+browseHist = pd.read_csv('train/browse_history_train.txt',names = ['userId', 'timeStmp', 'browsAct', 'browsId'])
 browseHist2 = pd.merge(browseHist,userInfo[['userId','loanTime']],how = 'right',on = 'userId')
 # ==========================================================================================================================#
 # ==========================================================================================================================#
@@ -43,13 +57,17 @@ browseHist2 = pd.merge(browseHist,userInfo[['userId','loanTime']],how = 'right',
 browseHistBeforeLoan = browseHist2[browseHist2['timeStmp'] <= browseHist2['loanTime']].drop('loanTime',axis =1)
 
 brewseHistGpBeforeLoan = browseHistBeforeLoan.groupby('userId')
-# brewseHistDescribeBeforeLoan = brewseHistGpBeforeLoan.describe()
+brewseHistDescribeBeforeLoan = brewseHistGpBeforeLoan.describe(percentiles)
 # as the cal time is very slow, save the result into a file for later use
 # brewseHistDescribeBeforeLoan.to_csv('../describes/brewseHistDescribeBeforeLoan.csv')
-# brewseHistDescribeBeforeLoan = brewseHistDescribeBeforeLoan.reset_index()
+# brewseHistDescribeBeforeLoan.to_csv('../describes/brewseHistDescribeBeforeLoanFull.csv')
+brewseHistDescribeBeforeLoan.to_csv('../describes/browseHistDescribeBeforeLoanFullDense.csv')
+brewseHistDescribeBeforeLoan = brewseHistDescribeBeforeLoan.reset_index()
 
 # just read pre-processed 'brewseHistDescribe'
-brewseHistDescribeBeforeLoan = pd.read_csv('../describes/brewseHistDescribeBeforeLoan.csv')
+# brewseHistDescribeBeforeLoan = pd.read_csv('../describes/brewseHistDescribeBeforeLoan.csv')
+# brewseHistDescribeBeforeLoan = pd.read_csv('../describes/brewseHistDescribeBeforeLoanFull.csv')
+brewseHistDescribeBeforeLoan = pd.read_csv('../describes/brewseHistDescribeBeforeLoanFullDense.csv')
  # change time stamp into hours, so showing hour information
 brewseHistDescribeBeforeLoan['timeStmp'] = (brewseHistDescribeBeforeLoan['timeStmp']//3600)%24
 
@@ -70,14 +88,17 @@ brewseHistDescribeBeforeLoan.columns = colNamesBeforeLoan
 # After loan time
 browseHistAfterLoan = browseHist2[browseHist2['timeStmp'] > browseHist2['loanTime']].drop('loanTime',axis =1)
 
-brewseHistGpAfterLoan = browseHistAfterLoan.groupby('userId')
-brewseHistDescribeAfterLoan = brewseHistGpAfterLoan.describe()
+brewseHistGpAfterLoan = browseHistAfterLoan.groupby('userId')aa
+brewseHistDescribeAfterLoan = brewseHistGpAfterLoan.describe(percentiles)
 # as the cal time is very slow, save the result into a file for later use
-brewseHistDescribeAfterLoan.to_csv('../describes/brewseHistDescribeAfterLoan.csv')
+# brewseHistDescribeAfterLoan.to_csv('../describes/brewseHistDescribeAfterLoan.csv')
+# brewseHistDescribeAfterLoan.to_csv('../describes/brewseHistDescribeAfterLoanFull.csv')
+brewseHistDescribeAfterLoan.to_csv('../describes/brewseHistDescribeAfterLoanFullDense.csv')
 brewseHistDescribeAfterLoan = brewseHistDescribeAfterLoan.reset_index()
 
 # just read pre-processed 'brewseHistDescribe'
-brewseHistDescribeAfterLoan = pd.read_csv('../describes/brewseHistDescribeAfterLoan.csv')
+# brewseHistDescribeAfterLoan = pd.read_csv('../describes/brewseHistDescribeAfterLoan.csv')
+brewseHistDescribeAfterLoan = pd.read_csv('../describes/brewseHistDescribeAfterLoanFull.csv')
  # change time stamp into hours, so showing hour information
 brewseHistDescribeAfterLoan['timeStmp'] = (brewseHistDescribeAfterLoan['timeStmp']//3600)%24
 
@@ -89,4 +110,5 @@ brewseHistDescribeAfterLoan.columns = colNamesAfterLoan
 
 features = pd.merge(brewseHistDescribeBeforeLoan, brewseHistDescribeAfterLoan, how = 'outer', on = 'userId')
 
-features.to_csv('../dataSets/browseHistFeaturesTrain.csv')
+features.set_index('userId').to_csv('../feature/browseHistFeaturesFullDense.csv')
+a

@@ -12,7 +12,10 @@ userInfo['loanTime'] = userInfo['loanTime'] // 86400
 # bankDetail = pd.read_csv('../dataSets/bankDetailTrain.csv',index_col = False, header  = None, names = bankDetailCol)
 
 # bankDetailCol = ['userId','timeStamp','transType','transAmount','salaryIncome']
-bankDetail = pd.read_csv('../dataSets/bankDetailTrain.csv').dropna().sort_values('userId')
+# bankDetail = pd.read_csv('../dataSets/bankDetailTrain.csv').dropna().sort_values('userId')
+
+colNames =  ['userId','timeStamp','transType','transAmount','salaryIncome']
+bankDetail = pd.read_csv('train/bank_detail_train.txt',names = colNames).sort_values('userId')
 bankDetail['timeStamp'] = bankDetail['timeStamp'] // 86400 # sec convert to day
 
 ''' convert all rows belong to one userId into one row'''
@@ -154,4 +157,5 @@ featureAfterLoan = pd.merge(featureAfterLoan, spendGpBefore['transAmount'].agg({
 features = pd.merge(featureBeforeLoan,featureAfterLoan,how = 'outer', on ='userId')
 features = pd.merge(features,userInfo,how = 'right',on = 'userId')
 # features = features[['overDueLabel'] + list(features.columns.drop('overDueLabel'))]
-features.to_csv('../featureFolderTrain/bankDetailsFeatures.csv')
+# features.to_csv('../featureFolderTrain/bankDetailsFeatures.csv')
+features.to_csv('../feature/bankDetailsFeaturesFull.csv')
