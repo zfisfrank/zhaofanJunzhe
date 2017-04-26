@@ -11,9 +11,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pickle
 from sklearn.externals import joblib
-from modifyFun import calAccu
-from modifyFun import calAccuTrain
-import time
 def ks(y_predicted, y_true):
     label=y_true
     #label = y_true.get_label()
@@ -44,6 +41,20 @@ def combineAllInfo():
     allData = pd.concat([fullInfo,moneyTotalFlat1],axis = 1)
     allData['loanTime'] = allData['loanTime']//2638000
     return [allData,labels]
+
+def dropnaByPrecent(allData,axisVal=0,nonNanPercentile = 0.001): #axis = 0 for drop row, axisVal = 1 for drop columns
+    # nonNanPercentile = 0.
+    [rowThresh,colThresh] = list(allData.shape)
+    rowThresh = np.ceil(rowThresh * nonNanPercentile)
+    colThresh = np.ceil(colThresh * nonNanPercentile)
+    threshs = [rowThresh,colThresh]
+    dropName =[' row',' column']
+    print('drop ', dropName[axisVal], ' minimum data', threshs[axisVal])
+    allData2 = allData.dropna(axis=axisVal, thresh = threshs[axisVal] )
+    print('before drop shape: ',allData.shape)
+    print('after drop shape: ', allData2.shape)
+    return allData2
+
 
 def splitData(allData,labels):
     all1Data,all0Data = modifyAllData(allData,labels)
@@ -83,53 +94,30 @@ def allDataOverSampling(allData,labels):
 
 def find01Data(allData,labels): # return [dF with label = 1, dF with label = 0]
     # allData = dropnaByPrecent(allData,axisVal=1,nonNanPercentile=0.01)
-    allData = allData.dropna(axis = 1, thresh = 583)
-    userId1 = labels[labels == 1].dropna().index
-    userId0 = labels[labels == 0].dropna().index
+    allData = allData.dropna(axis = 1, thresh = 5263)
+    userId1 = labels[labels == 1].index
+    userId0 = labels[labels == 0].index
     return [allData.loc[userId1], allData.loc[userId0]]
 
 
 def modifyAllData(allData,labels):
     all1Data,all0Data = find01Data(allData,labels)
-    all0Data = all0Data.dropna(axis=0, thresh = 550)
+    all0Data = all0Data.dropna(axis=0, thresh = 132)
     # all0Data = dropnaByPrecent(all0Data,nonNanPercentile=0.01) # as 1 labels are too small, only drop 0 labeled data
     return[all1Data,all0Data]
 
-
-
-from modifyFun import normalize, zScoreNormalize
-from sklearn import decomposition
-pca = decomposition.PCA()
-# pca.fit(allData.fillna(allData.mean()))
 # def testAlgo(allData, labels):
 #================================================================================================================
 #================================================================================================================
 #================================================================================================================
 allDataTrain, allDataVali, trainLabel, valiLabel = splitData(allData,labels)
 allDataTrain,allDataVali,allDataTest,trainLabel,valiLabel,testLabel = split3Data(allData,labels)
-# 0-1 normalize all data and split
-# allDataTrain,allDataVali,allDataTest,trainLabel,valiLabel,testLabel = split3Data(normalize(allData.reset_index()).set_index('userId'),labels)
-# z-score normalize all data and split
-# allDataTrain,allDataVali,allDataTest,trainLabel,valiLabel,testLabel = split3Data(zScoreNormalize(allData.reset_index()).set_index('userId'),labels)
-# PCA data
-# allDataTrain,allDataVali,allDataTest,trainLabel,valiLabel,testLabel = split3Data(pca.transform(allData.fillna(allData.mean())),labels)
-
 allDataTrain = allDataTrain.fillna(allDataTrain.mean())
-# allDataTrain = allDataTrain.fillna(-1)
+allDataTrain = allDataTrain.fillna(-1)
 allDataVali = allDataVali.fillna(allDataVali.mean())
-# allDataVali = allDataVali.fillna(-1)
+allDataVali = allDataVali.fillna(-1)
 allDataTest = allDataTest.fillna(allDataVali.mean())
-# allDataTest = allDataTest.fillna(-1)
-
-# put all features to PCA
-# pca.fit(allDataTrain)
-# allDataTrain = pca.transform(allDataTrain)
-# pca.fit(allDataVali)
-# allDataVali = pca.transform(allDataVali)
-# pca.fit(allDataTest)
-# allDataTest = pca.transform(allDataTest)
-# end of PCA modification
-
+allDataTest = allDataTest.fillna(-1)
 print(allDataTrain.shape)
 allDataTrain,trainLabel = allDataOverSampling(allDataTrain,trainLabel)
 print(allDataTrain.shape)
@@ -138,54 +126,19 @@ rf.fit(allDataTrain,trainLabel)
 valiResult = rf.predict(allDataVali)
 trainResult = rf.predict(allDataTrain)
 testResult = rf.predict(allDataTest)
-
-# print(ks(valiResult,valiLabel))
-
-#================================================================================================================
-#=======================================get the results stored===================================================
-#================================================================================================================
-result = ks(valiResult,valiLabel)
-print(result)
-p11,p01,p00,p10 = calAccu(valiResult,valiLabel)
-logDf = logDf.append(pd.Series([result[1],p11,p01,p00,p10,time.ctime()],index=['KS','P11','P01','P00','P10','time'],name = 'valiResult'))
-
-result = ks(trainResult,trainLabel)
-print(result)
-p11,p01,p00,p10 = calAccuTrain(trainResult,trainLabel)
-logDf = logDf.append(pd.Series([result[1],p11,p01,p00,p10,time.ctime()],index=['KS','P11','P01','P00','P10','time'],name = 'trainResult'))
-
-result = ks(testResult,testLabel)
-print(result)
-p11,p01,p00,p10 = calAccu(testResult,testLabel)
-logDf = logDf.append(pd.Series([result[1],p11,p01,p00,p10,time.ctime()],index=['KS','P11','P01','P00','P10','time'],name = 'testResult'))
+print(ks(valiResult,valiLabel))
+print(ks(trainResult,trainLabel))
+print(ks(testResult,testLabel))
 
 
-#================================================================================================================
-#----------------------------------------------------------------------------------------------------------------
-#================================================================================================================
-np.savetxt("../results/valiResult.csv",valiResult,delimiter=',')
-np.savetxt("../results/valiLabel.csv",valiLabel,delimiter=',')
-logDf = pd.DataFrame(columns = ['KS','P11','P01','P00','P10','time'])
 
 for i in range(10):
-    allDataTrain, allDataVali, allDataTest, trainLabel, valiLabel, testLabel = split3Data(allData, labels)
-    allDataTrain = allDataTrain.fillna(allDataTrain.mean())
-    allDataTrain = allDataTrain.fillna(-1)
-    allDataVali = allDataVali.fillna(allDataVali.mean())
-    allDataVali = allDataVali.fillna(-1)
-    allDataTest = allDataTest.fillna(allDataVali.mean())
-    allDataTest = allDataTest.fillna(-1)
-    print(allDataTrain.shape)
-    allDataTrain, trainLabel = allDataOverSampling(allDataTrain, trainLabel)
-    print(allDataTrain.shape)
-    rf = RandomForestClassifier(n_estimators=50, min_impurity_split=1e-8)
     rf.fit(allDataTrain, trainLabel)
     valiResult = rf.predict(allDataVali)
     trainResult = rf.predict(allDataTrain)
-    testResult = rf.predict(allDataTest)
     print(ks(valiResult, valiLabel))
     print(ks(trainResult, trainLabel))
-    print(ks(testResult, testLabel))
+    joblib.dump(rf, '../results/loopTest'+str(i)+'.pkl')
 
 rfAll = rf
 #================================================================================================================
