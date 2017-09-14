@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="169cf5ca-3c65-4587-8cea-633e7d5a365c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/combineAllFeaturesTest.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/billBankMonthDataTrain.py" afterPath="$PROJECT_DIR$/billBankMonthDataTrain.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/featureExtractBankDetail.py" afterPath="$PROJECT_DIR$/featureExtractBankDetail.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/featureExtractBillDetail.py" afterPath="$PROJECT_DIR$/featureExtractBillDetail.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/featureExtractBrowseHist.py" afterPath="$PROJECT_DIR$/featureExtractBrowseHist.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modifyFun.py" afterPath="$PROJECT_DIR$/modifyFun.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -41,8 +35,8 @@
       <file leaf-file-name="allFeatureSelect.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/allFeatureSelect.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="80">
-              <caret line="91" column="0" lean-forward="true" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+            <state relative-caret-position="1365">
+              <caret line="91" column="0" lean-forward="false" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
               <folding>
                 <element signature="e#26#35#0" expanded="true" />
               </folding>
@@ -53,8 +47,8 @@
       <file leaf-file-name="allDataTest.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/allDataTest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-695">
-              <caret line="84" column="46" lean-forward="false" selection-start-line="84" selection-start-column="39" selection-end-line="84" selection-end-column="46" />
+            <state relative-caret-position="1080">
+              <caret line="107" column="40" lean-forward="false" selection-start-line="107" selection-start-column="40" selection-end-line="107" selection-end-column="40" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
                 <element signature="e#291#376#0" expanded="false" />
@@ -74,9 +68,10 @@
       <file leaf-file-name="modifyFun.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modifyFun.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="74">
-              <caret line="8" column="28" lean-forward="false" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="28" />
+            <state relative-caret-position="150">
+              <caret line="10" column="26" lean-forward="false" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
               <folding>
+                <element signature="e#26#35#0" expanded="true" />
                 <element signature="e#710#1127#0" expanded="false" />
                 <element signature="e#2123#2296#0" expanded="false" />
                 <element signature="e#2323#2895#0" expanded="false" />
@@ -91,11 +86,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="billBankMonthDataTrain.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/billBankMonthDataTrain.py">
+      <file leaf-file-name="featureSelectZF.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/featureSelectZF.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="89">
-              <caret line="93" column="35" lean-forward="false" selection-start-line="93" selection-start-column="21" selection-end-line="93" selection-end-column="35" />
+            <state relative-caret-position="15">
+              <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="learning2.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/learning2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="960">
+              <caret line="64" column="10" lean-forward="false" selection-start-line="64" selection-start-column="10" selection-end-line="64" selection-end-column="10" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -103,14 +108,58 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="combineAllFeaturesTest.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/combineAllFeaturesTest.py">
+      <file leaf-file-name="billBankMonthDataTrain.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/billBankMonthDataTrain.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="103" column="41" lean-forward="true" selection-start-line="103" selection-start-column="41" selection-end-line="103" selection-end-column="41" />
+            <state relative-caret-position="90">
+              <caret line="6" column="27" lean-forward="false" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
               <folding>
-                <element signature="e#0#19#0" expanded="true" />
+                <element signature="e#783#1355#0" expanded="false" />
+                <element signature="e#8161#9048#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="testScript.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/testScript.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="32" column="23" lean-forward="false" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="featureExtractBrowseHist.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/featureExtractBrowseHist.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="54" column="28" lean-forward="false" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
+              <folding>
+                <element signature="e#350#1239#0" expanded="false" />
+                <element signature="e#1270#1928#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="featureExtractBillDetail.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/featureExtractBillDetail.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="585">
+              <caret line="40" column="6" lean-forward="false" selection-start-line="40" selection-start-column="6" selection-end-line="40" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="featureExtractBankDetail.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/featureExtractBankDetail.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="18" column="6" lean-forward="false" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -126,22 +175,12 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>loant</find>
-      <find>reshape</find>
-      <find>tBank</find>
-      <find>allData =</find>
-      <find>RandomOverSampler</find>
-      <find>doubleIndex2single</find>
-      <find>set_index()</find>
-      <find>dropnaByPrecent</find>
       <find>dis</find>
       <find>90</find>
       <find>.describe</find>
-      <find>dropna</find>
       <find>allData</find>
       <find>brewseHistGpAfterLoan.describe(percentiles)</find>
       <find>alldata</find>
-      <find>dropna(</find>
       <find>aa</find>
       <find>readUserInfo</find>
       <find>thresh =</find>
@@ -149,13 +188,23 @@
       <find>browHist</find>
       <find>bankDetail</find>
       <find>combineAllInfo</find>
-      <find>thresh =</find>
       <find>splitData</find>
       <find>rfAll.feature_importances_</find>
       <find>alldata =</find>
-      <find>featureCol</find>
       <find>modifyAllData</find>
       <find>logdf</find>
+      <find>dropna</find>
+      <find>dropna(</find>
+      <find>thresh</find>
+      <find>featureCol</find>
+      <find>colNames</find>
+      <find>append</find>
+      <find>pca</find>
+      <find>pickle</find>
+      <find>joblib</find>
+      <find>ks</find>
+      <find>modifyf</find>
+      <find>RandomOverSampler</find>
     </findStrings>
     <replaceStrings>
       <replace>txt</replace>
@@ -567,7 +616,14 @@
       <option name="project" value="LOCAL" />
       <updated>1492086486347</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="with filtering training set, good KS achived">
+      <created>1492165871047</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1492165871047</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -586,18 +642,19 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="4" y="23" width="1436" height="877" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20301291" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23457676" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32806325" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32806325" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30566534" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32806325" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32806325" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30566534" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.314888" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39975247" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -644,7 +701,8 @@
     <MESSAGE value="added allDataTest.py, which will convert data in seconeds to in month" />
     <MESSAGE value="modified learning2 for checking the monthly data to KS value influence" />
     <MESSAGE value="billBank month data train and KS test samples" />
-    <option name="LAST_COMMIT_MESSAGE" value="billBank month data train and KS test samples" />
+    <MESSAGE value="with filtering training set, good KS achived" />
+    <option name="LAST_COMMIT_MESSAGE" value="with filtering training set, good KS achived" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -667,6 +725,7 @@
         <state relative-caret-position="360">
           <caret line="27" column="12" lean-forward="false" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="12" />
           <folding>
+            <element signature="e#26#35#0" expanded="true" />
             <element signature="e#710#1127#0" expanded="false" />
             <element signature="e#2123#2296#0" expanded="false" />
             <element signature="e#2323#2895#0" expanded="false" />
@@ -705,6 +764,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1230">
           <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -729,6 +789,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -736,9 +797,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="780">
           <caret line="58" column="55" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="97" selection-end-column="55" />
-          <folding>
-            <element signature="e#66#84#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -764,6 +822,7 @@
         <state relative-caret-position="360">
           <caret line="27" column="12" lean-forward="false" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="12" />
           <folding>
+            <element signature="e#26#35#0" expanded="true" />
             <element signature="e#710#1127#0" expanded="false" />
             <element signature="e#2123#2296#0" expanded="false" />
             <element signature="e#2323#2895#0" expanded="false" />
@@ -802,6 +861,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1230">
           <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -816,6 +876,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -823,9 +884,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="780">
           <caret line="58" column="55" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="97" selection-end-column="55" />
-          <folding>
-            <element signature="e#66#84#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -851,6 +909,7 @@
         <state relative-caret-position="360">
           <caret line="27" column="12" lean-forward="false" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="12" />
           <folding>
+            <element signature="e#26#35#0" expanded="true" />
             <element signature="e#710#1127#0" expanded="false" />
             <element signature="e#2123#2296#0" expanded="false" />
             <element signature="e#2323#2895#0" expanded="false" />
@@ -889,6 +948,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1230">
           <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -903,6 +963,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1920">
           <caret line="130" column="12" lean-forward="true" selection-start-line="130" selection-start-column="12" selection-end-line="130" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -910,9 +971,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="36" lean-forward="true" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
-          <folding>
-            <element signature="e#66#84#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -927,6 +985,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1920">
           <caret line="130" column="12" lean-forward="false" selection-start-line="130" selection-start-column="12" selection-end-line="130" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -934,9 +993,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="491">
           <caret line="33" column="4" lean-forward="false" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
-          <folding>
-            <element signature="e#66#84#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -947,24 +1003,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/featureExtractBillDetailJun.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/learning1.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="130" column="0" lean-forward="false" selection-start-line="130" selection-start-column="0" selection-end-line="133" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/learning2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="95" column="0" lean-forward="true" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -975,20 +1017,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/featureSelectZF.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-544">
-          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/featureExtractBillDetail.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="92" column="0" lean-forward="false" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/startUp.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-563">
@@ -996,18 +1024,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/featureExtractBankDetail.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="160" column="27" lean-forward="false" selection-start-line="160" selection-start-column="20" selection-end-line="160" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sketch.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1015,37 +1035,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="19" column="14" lean-forward="false" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="35" />
-          <folding>
-            <element signature="e#66#84#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testScript.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="32" column="23" lean-forward="false" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/combineAllFeaturesTest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="103" column="41" lean-forward="true" selection-start-line="103" selection-start-column="41" selection-end-line="103" selection-end-column="41" />
+        <state relative-caret-position="1545">
+          <caret line="103" column="41" lean-forward="false" selection-start-line="103" selection-start-column="41" selection-end-line="103" selection-end-column="41" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/featureExtractBrowseHist.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-415">
-          <caret line="45" column="38" lean-forward="true" selection-start-line="45" selection-start-column="29" selection-end-line="45" selection-end-column="38" />
-          <folding>
-            <element signature="e#350#1239#0" expanded="false" />
-            <element signature="e#1270#1928#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1054,26 +1052,24 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
           <caret line="98" column="34" lean-forward="false" selection-start-line="98" selection-start-column="34" selection-end-line="98" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#19#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/allFeatureSelect.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="91" column="0" lean-forward="true" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+        <state relative-caret-position="1365">
+          <caret line="91" column="0" lean-forward="false" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
           <folding>
             <element signature="e#26#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/featureExtractBillDetailJun.py" />
     <entry file="file://$PROJECT_DIR$/allDataTest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-695">
-          <caret line="84" column="46" lean-forward="false" selection-start-line="84" selection-start-column="39" selection-end-line="84" selection-end-column="46" />
+        <state relative-caret-position="1080">
+          <caret line="107" column="40" lean-forward="false" selection-start-line="107" selection-start-column="40" selection-end-line="107" selection-end-column="40" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
             <element signature="e#291#376#0" expanded="false" />
@@ -1089,11 +1085,68 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/featureExtractBillDetail.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="40" column="6" lean-forward="false" selection-start-line="40" selection-start-column="6" selection-end-line="40" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/featureExtractBankDetail.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="18" column="6" lean-forward="false" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/featureExtractBrowseHist.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="54" column="28" lean-forward="false" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
+          <folding>
+            <element signature="e#350#1239#0" expanded="false" />
+            <element signature="e#1270#1928#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testScript.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="32" column="23" lean-forward="false" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/learning2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="960">
+          <caret line="64" column="10" lean-forward="false" selection-start-line="64" selection-start-column="10" selection-end-line="64" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/billBankMonthDataTrain.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="27" lean-forward="false" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
+          <folding>
+            <element signature="e#783#1355#0" expanded="false" />
+            <element signature="e#8161#9048#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/modifyFun.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="74">
-          <caret line="8" column="28" lean-forward="false" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="28" />
+        <state relative-caret-position="150">
+          <caret line="10" column="26" lean-forward="false" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
           <folding>
+            <element signature="e#26#35#0" expanded="true" />
             <element signature="e#710#1127#0" expanded="false" />
             <element signature="e#2123#2296#0" expanded="false" />
             <element signature="e#2323#2895#0" expanded="false" />
@@ -1107,13 +1160,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/billBankMonthDataTrain.py">
+    <entry file="file://$PROJECT_DIR$/featureSelectZF.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="93" column="35" lean-forward="false" selection-start-line="93" selection-start-column="21" selection-end-line="93" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="15">
+          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
